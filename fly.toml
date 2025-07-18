@@ -1,0 +1,20 @@
+app = "telegram-bot"
+region = "iad"
+
+[deploy]
+    image = "ghcr.io/<your_github_username>/telegram-bot:latest" # Replace with your github username and image name
+
+[processes]
+    [processes.app]
+        type = "worker"
+        command = ["python", "main.py"]
+        ports = [8080]
+        concurrency = 1
+        instances = { min = 1, max = 5 }
+        resources = {
+            cpu = 256
+            memory = 256
+        }
+
+[http_service]
+    port = 8080
